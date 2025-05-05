@@ -75,9 +75,9 @@ jobs:
           retention-days: 5 
     docker:
         name: Containerization
-        needs: [unit-testing, code-coverage]  # this job will run after the unit-testing and code-coverage jobs are completed successfully
+        needs: [unit-testing, code-coverage]   
         permissions:
-          packages: write  # this job will have write access to the package registries
+          packages: write  
 
         runs-on: ubuntu-latest
         steps:
@@ -94,14 +94,14 @@ jobs:
         - name: Docker Build For Testing
           uses: docker/build-push-action@v6
           with:
-            context: .  # context is the path to the Dockerfile. it can be a local path or a URL.
-            push: false  # set to true if you want to push the image to Docker Hub
-            tags: ghcr.io/${{ github.repository_owner }}/solar-system:${{ github.sha }}
+            context: .   
+            push: false   
+            tags: ${{ vars.DOCKER_USERNAME }}/solar-system:${{ github.sha }}
 
         - name: Docker Push
           uses: docker/build-push-action@v6
           with:
-            context: .  # context is the path to the Dockerfile. it can be a local path or a URL.
-            push: true  # set to false if you don't want to push the image to Docker Hub
+            context: .   
+            push: true   
             tags: ghcr.io/${{ github.repository_owner }}/solar-system:${{ github.sha }}   
         
