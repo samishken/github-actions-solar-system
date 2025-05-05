@@ -96,7 +96,7 @@ jobs:
           with:
             context: .  # context is the path to the Dockerfile. it can be a local path or a URL.
             push: false  # set to true if you want to push the image to Docker Hub
-            tags: ${{ vars.DOCKER_USERNAME }}/solar-system:${{ github.sha }} 
+            tags: ghcr.io/${{ github.repository_owner }}/solar-system:${{ github.sha }}
 
         - name: Docker Push
           uses: docker/build-push-action@v6
