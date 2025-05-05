@@ -91,17 +91,10 @@ jobs:
             username: ${{ github.repository_owner }}
             password: ${{ secrets.GITHUB_TOKEN }}
 
-        - name: Docker Build For Testing
+        - name: Container Registry Push
           uses: docker/build-push-action@v6
           with:
-            context: .   
-            push: false   
-            tags: ${{ vars.DOCKER_USERNAME }}/solar-system:${{ github.sha }}
-
-        - name: Docker Push
-          uses: docker/build-push-action@v6
-          with:
-            context: .   
-            push: true   
-            tags: ghcr.io/${{ github.repository_owner }}/solar-system:${{ github.sha }}   
+            context: .
+            push: true
+            tags: 'ghcr.io/${{ github.repository_owner }}/solar-system:${{ github.sha }}' 
         
