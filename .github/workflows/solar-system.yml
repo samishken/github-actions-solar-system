@@ -23,7 +23,12 @@ jobs:
           uses: actions/setup-node@v4
           with:
             node-version: 20
-    
+            
+        - name: Cache NPM dependencies
+          uses: ./.github/custom-actions/npm-action
+          with:
+            path-of-folder: node_modules
+          
         - name: Install Dependencies
           run: npm install
     
